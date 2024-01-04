@@ -1,0 +1,77 @@
+<div class="flex justify-content-between">
+    <h2>Produits</h2>
+    <p-button label="Ajouter" (click)="showAddModal()"></p-button>
+</div>
+<p-table [value]="produits" [paginator]="true"[rows]="4">
+    <ng-template pTemplate="caption">
+    <app-filter-project (selectedCategory)="getProduitsByCategory($event)"> </app-filter-project>
+</ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+           <th width="30%">Titre</th>
+           <th width="30%">Prix</th>
+            <th width="30%">Categories</th>
+           <th width="30%">Images</th>
+           <th width="5%"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-produit>
+        
+        <tr>
+            <td>{{ produit.title }}</td>
+            <td>{{ produit.price }}</td>
+            <td>{{ produit.category }}</td>
+            <td> <img src="{{ produit.image }}"
+                 width="20px"></td>
+                 
+            <td>
+                <button
+                pButton icon="pi pi-pencil"
+                class="p-button-rounded  p-button-success mr-2"
+                (click)="showEditModal(produit)">
+
+                </button>
+            </td>
+            <td>
+                <button
+                pButton icon="pi pi-trash"
+                class="p-button-rounded  p-button-warning mr-2"
+                (click)="deleteProduit(produit)">
+
+                </button>
+            </td>
+         
+        </tr>
+        
+    </ng-template>
+    <ng-template pTemplate="summary"> Footer </ng-template>
+</p-table>
+<app-add-edit-produit 
+[displayAddEditModal]="displayAddEditModal"
+[selectedProduit]="selectedProduit"
+(clickClose)="hideAddModal($event)"
+(clickAddEdit)="saveOrUpdateProduitList($event)"
+> 
+</app-add-edit-produit>
+<p-confirmDialog header="suprimer"></p-confirmDialog>
+<p-toast position="bottom-right"></p-toast>
+<!-- <p-dialog
+ header="Header"
+  [(visible)]="displayAddEditModal" 
+ [modal]="true" 
+ [style]="{ width: '50vw' }" 
+ [draggable]="false"
+  [resizable]="false">
+    <p class="m-0">
+        peut ajouter des produits seul l'admin
+    </p>
+    <ng-template pTemplate="Footer">
+
+        <p-button 
+        (click)="displayAddEditModal=false" 
+        label="Cancel" 
+        styleClass="p-button-text">
+
+        </p-button>
+    </ng-template>
+</p-dialog> -->

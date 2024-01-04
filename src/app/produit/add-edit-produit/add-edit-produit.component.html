@@ -1,0 +1,59 @@
+<p-dialog header="{{modalType}}" [(visible)]="displayAddEditModal" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false"
+    [resizable]="false" (onHide)="closeModal()">
+    <form [formGroup]="produitForm" class="produit-form">
+<div class="field">
+    <label class="block" for="title">Title</label>
+        <input type="text" pInputText id="title" formControlName="title"/>
+   <small class="p-error-block"
+    *ngIf="produitForm.controls['title'].invalid &&
+    produitForm.controls['title'].dirty">
+     field is required</small>
+</div>
+<div class="fiel">
+    <label class="block" for="price">Price</label>
+        <p-inputNumber id="price" formControlName="price"
+         class="block"> </p-inputNumber>
+        <small class="p-error-block"
+    *ngIf="produitForm.controls['price'].invalid &&
+    produitForm.controls['price'].dirty">
+     field is required</small>
+
+</div>
+<div class="fiel">
+    <label class="block" for="description">Description</label>
+        <textarea  pInputTextarea  id="description"
+         formControlName="description"></textarea>
+    
+</div>
+<div class="field">
+    <label class="block" for="category">Category</label>
+        <input type="text" pInputText id="category" formControlName="category"/>
+        <small class="p-error-block"
+    *ngIf="produitForm.controls['category'].invalid &&
+    produitForm.controls['category'].dirty">
+     field is required</small>
+</div>
+<div class="field">
+    <label class="block" for="image">Image</label>
+        <input type="text" pInputText id="image" formControlName="image"/>
+        <small class="p-error-block"
+    *ngIf="produitForm.controls['image'].invalid &&
+    produitForm.controls['image'].dirty">
+     field is required</small>
+</div>
+
+    </form>
+
+    <ng-template pTemplate="Footer">
+
+        <p-button (click)="closeModal()" label="Cancel" styleClass="p-button-text">
+
+        </p-button>
+        <p-button (click)="addEditProduit()" 
+        label="{{modalType}}" 
+        [disabled]="produitForm.invalid"
+        styleClass="p-button-text">
+
+        </p-button>
+    </ng-template>
+</p-dialog>
